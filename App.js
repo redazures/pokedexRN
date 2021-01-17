@@ -22,10 +22,9 @@ const App: () => React$Node = () => {
       <SafeAreaView>
         <Text>was here</Text>
         <Icon
-          reverse
-          name='ios-american-football'
+          
+          name='add'
           type='ionicon'
-          color='#517fa4'
         />
       </SafeAreaView>
     </>
