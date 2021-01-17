@@ -1,9 +1,11 @@
 import React from 'react'
+import apiClient from './apiClient'
 
-import client from './client'
+const DigimonsToGet = '?limit=10'
 
 const getMon =()=>{
-    return client.get()
+    console.log("this is client")
+    return apiClient.get(DigimonsToGet)
 }
 
 export default getMon

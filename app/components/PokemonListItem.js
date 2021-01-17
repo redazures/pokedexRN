@@ -7,6 +7,7 @@ const PokemonListItem = ({ image, name })=>(
   <ListItem 
     rounded 
     bottomDivider
+    onPress={()=>console.log("listitem")}
     Component={TouchableScale}
     friction={90}
     tension={100}

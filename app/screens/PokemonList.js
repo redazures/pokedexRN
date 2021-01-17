@@ -7,6 +7,7 @@ import getMons from '../api/getMons'
 const PokemonList = ()=>{
     const [ pokemons, setPokemons ] = useState([])
     
+    
     // const mapPokemons = ()=>{
     //     pokemons.map(el=>{
     //         let { url } = pokemon
@@ -16,17 +17,22 @@ const PokemonList = ()=>{
     //     })
     // }
 
-    // useEffect(() => {
-    //     console.log("this is useeffect")
-    //     mapPokemons()
-    //     console.log(pokemons)
-    //   },[]);
+    useEffect(() => {
+        console.log("this is useeffect")
+        populate()
+      },[]);
 
-    console.log(mapPokemons(),"this is my consolelog")
+    const populate = async () =>{
+        const response = await getMons()
+        console.log("this is response", response)
+    }
+
+    // keyExtractor = (pokemons, index) => index.toString()
+    // console.log(pokemons)
+
     return(
         <SafeAreaView>
-            <PokemonListItem image={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'} name='bulba'/>
-            {mapPokemons()}
+            <PokemonListItem image={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'} name='bulba'/>          
         </SafeAreaView>
     )
 }
