@@ -8,25 +8,17 @@
 
 import React from 'react';
 import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, } from 'react-native';
-
 import { Header, LearnMoreLinks, Colors, DebugInstructions, ReloadInstructions, } from 'react-native/Libraries/NewAppScreen';
-
-
 import { Icon } from 'react-native-elements'
+
+import PokemonList from './app/screens/PokemonList'
 
 
 const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <Text>was here</Text>
-        <Icon
-          
-          name='add'
-          type='ionicon'
-        />
-      </SafeAreaView>
+      <PokemonList/>
     </>
   );
 };
