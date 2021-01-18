@@ -12,7 +12,9 @@ const PokemonList = ()=>{
 
     useEffect(() => {
         loadingApi.request()
-      },[]);
+    },[]);
+
+    
 
     const digitize =({item})=>{
         const { url } = item
@@ -20,7 +22,11 @@ const PokemonList = ()=>{
         digimon.id = url.substring(34, url.length - 1)
         digimon.name = item.name.charAt(0).toUpperCase() + item.name.slice(1)
         return(
-            <PokemonListItem key={digimon.id} id={digimon.id} name={digimon.name}/>
+            <PokemonListItem 
+                key={digimon.id} 
+                id={digimon.id} 
+                name={digimon.name}
+            />
         )
     }
 
@@ -28,7 +34,6 @@ const PokemonList = ()=>{
         return loadingApi.data?.results?.filter(el=>el.name.toLowerCase().includes(search.toLowerCase()))
     }
 
-    console.log(filterSearch())
     return(
         <SafeAreaView style={{backgroundColor:'red', height:"100%"}}>
             <SearchBar 
