@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { SafeAreaView, FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
-import getMons from '../api/getMons'
+import { getPokemons } from '../api/apiCalls'
 import LoadingHook from '../components/LoadingHook'
 import PokemonListItem from '../components/PokemonListItem'
 
 const PokemonList = ()=>{
-    const loadingApi = LoadingHook(getMons)
+    const loadingApi = LoadingHook(getPokemons)
     const [ search, setSearch ] = useState("")
 
     useEffect(() => {
