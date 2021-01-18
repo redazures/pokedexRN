@@ -21,6 +21,7 @@ list=[
 
 const PokemonList = ()=>{
     const [ pokemons, setPokemons ] = useState([])
+    const [ search, setSearch ] = useState("")
 
     useEffect(() => {
         console.log("this is useeffect")
@@ -29,20 +30,16 @@ const PokemonList = ()=>{
 
     const populate = async () =>{
         const response = await getMons()
-        console.log("this is response")
+        console.log("this is response",response.data)
     }
-
-    keyExtractor = (pokemons, index) => index.toString()
 
     const digitize =({item})=>{
         const { url } = item
         const digimon ={}
         digimon.id = url.substring(34, url.length - 1)
         digimon.name = item.name.charAt(0).toUpperCase() + item.name.slice(1)
-        digimon.image=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${digimon.id}.png`
-        console.log(digimon)
         return(
-                <PokemonListItem image={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'} name='bulba'/>
+            <PokemonListItem key={digimon.id} id={digimon.id} name={digimon.name}/>
         )
     }
     
@@ -50,10 +47,9 @@ const PokemonList = ()=>{
 
     return(
         <SafeAreaView>
-            <PokemonListItem image={'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'} name='bulba'/>
             <FlatList
-                keyExtractor={keyExtractor}
-                data={list}
+                keyExtractor={(digimon, index) => index.toString()}
+                data={pokemons}
                 renderItem={digitize}
             />
         </SafeAreaView>
