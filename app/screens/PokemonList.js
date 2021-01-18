@@ -1,37 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import { SafeAreaView, StyleSheet, ScrollView, View, Text, StatusBar, FlatList } from 'react-native';
+import { SafeAreaView, FlatList } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 
-import PokemonListItem from '../components/PokemonListItem'
 import getMons from '../api/getMons'
-
-list=[
-    {
-    "name": "bulbasaur",
-    "url": "https://pokeapi.co/api/v2/pokemon/1/"
-    },
-    {
-    "name": "ivysaur",
-    "url": "https://pokeapi.co/api/v2/pokemon/2/"
-    },
-    {
-    "name": "venusaur",
-    "url": "https://pokeapi.co/api/v2/pokemon/3/"
-    },
-]
+import LoadingHook from '../components/LoadingHook'
+import PokemonListItem from '../components/PokemonListItem'
 
 const PokemonList = ()=>{
-    const [ pokemons, setPokemons ] = useState([])
+    const loadingApi = LoadingHook(getMons)
     const [ search, setSearch ] = useState("")
 
     useEffect(() => {
-        console.log("this is useeffect")
-        populate()
+        loadingApi.request()
       },[]);
-
-    const populate = async () =>{
-        const response = await getMons()
-        console.log("this is response",response.data)
-    }
 
     const digitize =({item})=>{
         const { url } = item
@@ -42,14 +23,23 @@ const PokemonList = ()=>{
             <PokemonListItem key={digimon.id} id={digimon.id} name={digimon.name}/>
         )
     }
-    
-    // console.log(pokemons)
 
+    const filterSearch=()=>{
+        return loadingApi.data?.results?.filter(el=>el.name.toLowerCase().includes(search.toLowerCase()))
+    }
+
+    console.log(filterSearch())
     return(
-        <SafeAreaView>
+        <SafeAreaView style={{backgroundColor:'red', height:"100%"}}>
+            <SearchBar 
+                containerStyle={{backgroundColor:'red'}}
+                onChangeText={setSearch} 
+                placeholder={"Search For Your Pokemon Here"} 
+                value={search} 
+            />
             <FlatList
-                keyExtractor={(digimon, index) => index.toString()}
-                data={pokemons}
+                keyExtractor={(item, index) => index.toString()}
+                data={filterSearch()}
                 renderItem={digitize}
             />
         </SafeAreaView>
