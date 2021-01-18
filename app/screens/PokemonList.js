@@ -6,7 +6,7 @@ import { getPokemons } from '../api/apiCalls'
 import LoadingHook from '../components/LoadingHook'
 import PokemonListItem from '../components/PokemonListItem'
 
-const PokemonList = ()=>{
+const PokemonList = ({ navigation })=>{
     const loadingApi = LoadingHook(getPokemons)
     const [ search, setSearch ] = useState("")
 
@@ -26,6 +26,10 @@ const PokemonList = ()=>{
                 key={digimon.id} 
                 id={digimon.id} 
                 name={digimon.name}
+                onPress={()=>{
+                    console.log("going somewhere")
+                    navigation.navigate("Show",digimon)
+                }}
             />
         )
     }
