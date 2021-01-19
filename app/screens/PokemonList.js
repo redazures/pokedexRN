@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { SafeAreaView, FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
-import { getPokemons } from '../api/apiCalls'
+import { getPokemons, getPokemonDetails } from '../api/apiCalls'
 import LoadingHook from '../components/LoadingHook'
 import PokemonListItem from '../components/PokemonListItem'
 
@@ -13,7 +13,6 @@ const PokemonList = ({ navigation })=>{
     useEffect(() => {
         loadingApi.request()
     },[]);
-
     
 
     const digitize =({item})=>{
@@ -27,7 +26,6 @@ const PokemonList = ({ navigation })=>{
                 id={digimon.id} 
                 name={digimon.name}
                 onPress={()=>{
-                    console.log("going somewhere")
                     navigation.navigate("Show",digimon)
                 }}
             />
@@ -37,7 +35,7 @@ const PokemonList = ({ navigation })=>{
     const filterSearch=()=>{
         return loadingApi.data?.results?.filter(el=>el.name.toLowerCase().includes(search.toLowerCase()))
     }
-
+    
     return(
         <SafeAreaView style={{backgroundColor:'red', height:"100%"}}>
             <SearchBar 

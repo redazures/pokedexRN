@@ -20,7 +20,7 @@ const PokemonListItem = ({ name, id, onPress })=>(
     ViewComponent={LinearGradient}
   >
     <Avatar 
-      size={"large"}
+      size={"medium"}
       source={{
         uri: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
       }} 
